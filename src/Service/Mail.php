@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -14,9 +15,9 @@ class Mail
   ) {
   }
 
-  public function sendMail($from, $to, $subject, $template, $context)
+  public function sendMail($from, $to, $subject, $template, $context): void
   {
-    $email = (new Email())
+    $email = (new TemplatedEmail())
       ->from($from)
       ->to($to)
       ->subject($subject)
@@ -26,13 +27,13 @@ class Mail
     $this->mailer->send($email);
   }
 
-  public function sendMailAfterRegistration($to, $context)
+  public function sendMailAfterRegistration($to, $context): void
   {
-    return $this->sendMail(
+    $this->sendMail(
       $this->from,
       $to,
       'Inscription au forum des métiers',
-      'emails/registration.html.twig',
+      'emails/after_registration.html.twig',
       $context
     );
   }

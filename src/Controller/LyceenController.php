@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Lyceen;
 use App\Form\LyceenType;
 use App\Repository\LyceenRepository;
+use App\Service\Mail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/lyceen')]
@@ -30,6 +32,7 @@ class LyceenController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $lyceen->setDateInscription(new \DateTime());
             $entityManager->persist($lyceen);
             $entityManager->flush();
 
@@ -43,15 +46,21 @@ class LyceenController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_lyceen_inscription', methods: ['GET', 'POST'])]
-    public function inscription(Request $request, EntityManagerInterface $entityManager): Response
+    public function inscription(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $lyceen = new Lyceen();
         $form = $this->createForm(LyceenType::class, $lyceen);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $lyceen->setDateInscription(new \DateTime());
             $entityManager->persist($lyceen);
             $entityManager->flush();
+
+            $mailSender = new Mail($mailer,$_ENV['MAILER_FROM']);
+            $mailSender->sendMailAfterRegistration($lyceen->getEmail(), [
+                'lyceen' => $lyceen,
+            ]);
 
             return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);
         }

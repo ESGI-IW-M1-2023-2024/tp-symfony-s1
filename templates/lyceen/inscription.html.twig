@@ -4,7 +4,8 @@
 
 {% block body %}
     <h1>Inscription Lycéen</h1>
-
+    {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit">S'inscrire</button>
+    {{ form_end(form) }}
 {% endblock %}
