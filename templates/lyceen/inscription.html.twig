@@ -5,7 +5,6 @@
 {% block body %}
     <h1>Inscription Lycéen</h1>
 
-    {{ include('lyceen/_form.html.twig') }}
-
-    <a href="{{ path('app_lyceen_index') }}">back to list</a>
+    {{ form_widget(form) }}
+    <button type="submit">S'inscrire</button>
 {% endblock %}

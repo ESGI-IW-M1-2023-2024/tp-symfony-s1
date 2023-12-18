@@ -42,6 +42,26 @@ class LyceenController extends AbstractController
         ]);
     }
 
+    #[Route('/inscription', name: 'app_lyceen_inscription', methods: ['GET', 'POST'])]
+    public function inscription(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $lyceen = new Lyceen();
+        $form = $this->createForm(LyceenType::class, $lyceen);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($lyceen);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('lyceen/inscription.html.twig', [
+            'lyceen' => $lyceen,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_lyceen_show', methods: ['GET'])]
     public function show(Lyceen $lyceen): Response
     {
@@ -68,6 +88,7 @@ class LyceenController extends AbstractController
         ]);
     }
 
+
     #[Route('/{id}', name: 'app_lyceen_delete', methods: ['POST'])]
     public function delete(Request $request, Lyceen $lyceen, EntityManagerInterface $entityManager): Response
     {
@@ -78,4 +99,5 @@ class LyceenController extends AbstractController
 
         return $this->redirectToRoute('app_lyceen_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
