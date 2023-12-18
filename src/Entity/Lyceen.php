@@ -32,6 +32,14 @@ class Lyceen
     #[ORM\JoinColumn(nullable: false)]
     private ?Lycee $lycee = null;
 
+    #[ORM\OneToMany(mappedBy: 'lyceen', targetEntity: Reponse::class)]
+    private Collection $reponses;
+
+    public function __construct()
+    {
+        $this->reponses = new ArrayCollection();
+    }
+
     #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'lyceens')]
     private Collection $ateliers;
 
@@ -101,6 +109,36 @@ class Lyceen
     public function setLycee(?Lycee $lycee): static
     {
         $this->lycee = $lycee;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(Reponse $reponse): static
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+            $reponse->setLyceen($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): static
+    {
+        if ($this->reponses->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getLyceen() === $this) {
+                $reponse->setLyceen(null);
+            }
+        }
 
         return $this;
     }

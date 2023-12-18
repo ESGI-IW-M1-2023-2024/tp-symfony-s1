@@ -24,9 +24,13 @@ class Question
     #[ORM\ManyToMany(targetEntity: Questionnaire::class, mappedBy: 'questions')]
     private Collection $questionnaires;
 
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class)]
+    private Collection $reponses;
+
     public function __construct()
     {
         $this->questionnaires = new ArrayCollection();
+        $this->reponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,6 +84,36 @@ class Question
     {
         if ($this->questionnaires->removeElement($questionnaire)) {
             $questionnaire->removeQuestion($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(Reponse $reponse): static
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses->add($reponse);
+            $reponse->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): static
+    {
+        if ($this->reponses->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getQuestion() === $this) {
+                $reponse->setQuestion(null);
+            }
         }
 
         return $this;
