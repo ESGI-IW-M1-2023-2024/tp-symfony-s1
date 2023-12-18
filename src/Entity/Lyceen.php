@@ -38,15 +38,11 @@ class Lyceen
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
+        $this->ateliers = new ArrayCollection();
     }
 
     #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'lyceens')]
     private Collection $ateliers;
-
-    public function __construct()
-    {
-        $this->ateliers = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
