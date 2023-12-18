@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lyceen{% endblock %}
+
+{% block body %}
+    <h1>Lyceen</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lyceen.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ lyceen.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ lyceen.telephone }}</td>
+            </tr>
+            <tr>
+                <th>DateInscription</th>
+                <td>{{ lyceen.dateInscription ? lyceen.dateInscription|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Section</th>
+                <td>{{ lyceen.section }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_lyceen_index') }}">back to list</a>
+
+    <a href="{{ path('app_lyceen_edit', {'id': lyceen.id}) }}">edit</a>
+
+    {{ include('lyceen/_delete_form.html.twig') }}
+{% endblock %}
