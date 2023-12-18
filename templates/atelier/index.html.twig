@@ -10,8 +10,9 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Heure</th>
-                <th>actions</th>
+                <th>Début de l'atelier</th>
+                <th>Secteur</th>
+                <th>Salle</th>
             </tr>
         </thead>
         <tbody>
@@ -20,16 +21,13 @@
                 <td>{{ atelier.id }}</td>
                 <td>{{ atelier.nom }}</td>
                 <td>{{ atelier.heure }}</td>
-                <td>
-                    <a href="{{ path('app_atelier_show', {'id': atelier.id}) }}">show</a>
-                    <a href="{{ path('app_atelier_edit', {'id': atelier.id}) }}">edit</a>
-                </td>
+                <td>{{ atelier.secteur }}</td>
+                <td>{{ atelier.salle }}</td>
             </tr>
-        {% else %}
+        {% endfor %}
             <tr>
                 <td colspan="4">no records found</td>
             </tr>
-        {% endfor %}
         </tbody>
     </table>
 
