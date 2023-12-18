@@ -16,8 +16,6 @@ class Encrypt
   {
     $user->setEmail(crypt($user->getEmail(), CRYPT_MD5));
     $user->setTelephone(crypt($user->getTelephone(), CRYPT_MD5));
-    $user->setNom(crypt($user->getNom(), CRYPT_MD5));
-    $user->setPrenom(crypt($user->getPrenom(), CRYPT_MD5));
     $this->em->persist($user);
     $this->em->flush();
   }
