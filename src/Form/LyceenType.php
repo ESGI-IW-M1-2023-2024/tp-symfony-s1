@@ -40,6 +40,7 @@ class LyceenType extends AbstractType
                     'Première' => 'Premiere',
                     'Terminale' => 'terminale',
                 ],
+                'data' => 'seconde',
                 'expanded' => true,
                 'multiple' => false,
             ])
