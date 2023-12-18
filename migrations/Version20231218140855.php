@@ -23,8 +23,6 @@ final class Version20231218140855 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE "user" (id INT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON "user" (email)');
-        $this->addSql('ALTER TABLE lyceen ADD nom VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE lyceen ADD prenom VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
@@ -33,7 +31,5 @@ final class Version20231218140855 extends AbstractMigration
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE "user_id_seq" CASCADE');
         $this->addSql('DROP TABLE "user"');
-        $this->addSql('ALTER TABLE lyceen DROP nom');
-        $this->addSql('ALTER TABLE lyceen DROP prenom');
     }
 }

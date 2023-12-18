@@ -44,12 +44,6 @@ class Lyceen
     #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'lyceens')]
     private Collection $ateliers;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -165,30 +159,6 @@ class Lyceen
     public function removeAtelier(Atelier $atelier): static
     {
         $this->ateliers->removeElement($atelier);
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): static
-    {
-        $this->prenom = $prenom;
 
         return $this;
     }
