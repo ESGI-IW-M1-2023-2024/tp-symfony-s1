@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LyceenRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,6 +31,14 @@ class Lyceen
     #[ORM\ManyToOne(inversedBy: 'lyceens')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Lycee $lycee = null;
+
+    #[ORM\ManyToMany(targetEntity: Atelier::class, inversedBy: 'lyceens')]
+    private Collection $ateliers;
+
+    public function __construct()
+    {
+        $this->ateliers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +101,30 @@ class Lyceen
     public function setLycee(?Lycee $lycee): static
     {
         $this->lycee = $lycee;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Atelier>
+     */
+    public function getAteliers(): Collection
+    {
+        return $this->ateliers;
+    }
+
+    public function addAtelier(Atelier $atelier): static
+    {
+        if (!$this->ateliers->contains($atelier)) {
+            $this->ateliers->add($atelier);
+        }
+
+        return $this;
+    }
+
+    public function removeAtelier(Atelier $atelier): static
+    {
+        $this->ateliers->removeElement($atelier);
 
         return $this;
     }

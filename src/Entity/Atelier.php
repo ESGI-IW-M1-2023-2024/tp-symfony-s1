@@ -35,10 +35,18 @@ class Atelier
     #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Ressource::class)]
     private Collection $ressources;
 
+    #[ORM\ManyToMany(targetEntity: Intervenant::class, inversedBy: 'ateliers')]
+    private Collection $intervenants;
+
+    #[ORM\ManyToMany(targetEntity: Lyceen::class, mappedBy: 'ateliers')]
+    private Collection $lyceens;
+
     public function __construct()
     {
         $this->metiers = new ArrayCollection();
         $this->ressources = new ArrayCollection();
+        $this->intervenants = new ArrayCollection();
+        $this->lyceens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,6 +157,57 @@ class Atelier
             if ($ressource->getAtelier() === $this) {
                 $ressource->setAtelier(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Intervenant>
+     */
+    public function getIntervenants(): Collection
+    {
+        return $this->intervenants;
+    }
+
+    public function addIntervenant(Intervenant $intervenant): static
+    {
+        if (!$this->intervenants->contains($intervenant)) {
+            $this->intervenants->add($intervenant);
+        }
+
+        return $this;
+    }
+
+    public function removeIntervenant(Intervenant $intervenant): static
+    {
+        $this->intervenants->removeElement($intervenant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lyceen>
+     */
+    public function getLyceens(): Collection
+    {
+        return $this->lyceens;
+    }
+
+    public function addLyceen(Lyceen $lyceen): static
+    {
+        if (!$this->lyceens->contains($lyceen)) {
+            $this->lyceens->add($lyceen);
+            $lyceen->addAtelier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLyceen(Lyceen $lyceen): static
+    {
+        if ($this->lyceens->removeElement($lyceen)) {
+            $lyceen->removeAtelier($this);
         }
 
         return $this;
