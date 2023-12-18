@@ -21,6 +21,17 @@ class LyceenRepository extends ServiceEntityRepository
         parent::__construct($registry, Lyceen::class);
     }
 
+    public function findByLycee($idLycee): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.lycee = :val')
+            ->setParameter('val', $idLycee)
+            ->orderBy('l.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Lyceen[] Returns an array of Lyceen objects
 //     */

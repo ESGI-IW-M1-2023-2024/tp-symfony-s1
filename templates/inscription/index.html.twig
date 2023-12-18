@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription par Lycee index{% endblock %}
+
+{% block body %}
+    <h1>Inscription par Lycee</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Heure</th>
+            <th>Secteur</th>
+            <th>Salle</th>
+            <th>Metiers</th>
+            <th>Ressources</th>
+            <th>Intervenants</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ateliersByLyceen in ateliers %}
+            {% for atelier in ateliersByLyceen %}
+                <tr>
+                    <td>{{ atelier.id }}</td>
+                    <td>{{ atelier.nom }}</td>
+                    <td>{{ atelier.heure }}</td>
+                    <td>{{ atelier.secteur }}</td>
+                    <td>{{ atelier.salle }}</td>
+                    <td>
+                        <ul>
+                            {% for metier in atelier.metiers %}
+                            <li>{{ metier.nom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for ressource in atelier.ressources %}
+                            <li>{{ ressource.nom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for intervenant in atelier.intervenants %}
+                            <li>{{ intervenant.nom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_atelier_new') }}">Create new</a>
+{% endblock %}
+
