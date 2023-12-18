@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\InscriptionRepository;
 use App\Repository\LyceenRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
