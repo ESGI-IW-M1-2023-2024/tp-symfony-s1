@@ -19,10 +19,10 @@ class SalleType extends AbstractType
 
         for ($i = 0; $i <= $nombreEtages; $i++) {
             if($i == 0){
-                $etages['Rez-de-chaussée'] = "etage_$i";
+                $etages['Rez-de-chaussée'] = "$i";
                 continue;
             }
-            $etages["Étage $i"] = "etage_$i";
+            $etages["Étage $i"] = "$i";
         }
 
         $builder

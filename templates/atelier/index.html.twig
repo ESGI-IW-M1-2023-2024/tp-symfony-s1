@@ -7,12 +7,13 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Heure</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Début de l'atelier</th>
+            <th>Secteur</th>
+            <th>Salle</th>
+        </tr>
         </thead>
         <tbody>
         {% for atelier in ateliers %}
@@ -20,6 +21,8 @@
                 <td>{{ atelier.id }}</td>
                 <td>{{ atelier.nom }}</td>
                 <td>{{ atelier.heure }}</td>
+                <td>{{ atelier.secteur.nom }}</td>
+                <td>{{ atelier.salle.nom }}</td>
                 <td>
                     <a href="{{ path('app_atelier_show', {'id': atelier.id}) }}">show</a>
                     <a href="{{ path('app_atelier_edit', {'id': atelier.id}) }}">edit</a>
