@@ -14,10 +14,17 @@ class MetierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
+            ->add('nom', null, [
+                'label' => 'Métier',
+                'attr' => [
+                    'placeholder' => 'Intitulé du métier',
+                ],
+
+            ])
             ->add('atelier', EntityType::class, [
                 'class' => Atelier::class,
-'choice_label' => 'id',
+                'choice_label' => 'nom',
+                'placeholder' => 'Séléctionner l\'atelier',
             ])
         ;
     }

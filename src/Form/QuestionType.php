@@ -6,6 +6,7 @@ use App\Entity\Question;
 use App\Entity\Questionnaire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,12 +15,24 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('intitule')
-            ->add('type')
+            ->add('intitule', null, [
+                'label' => 'Intitulé',
+                'attr' => [
+                    'placeholder' => 'Intitulé de la question',
+                ],
+            ])
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'ouverte' => true,
+                    'fermée' => false,
+                ],
+                'expanded' => true,
+                'multiple' => false,
+            ])
             ->add('questionnaires', EntityType::class, [
                 'class' => Questionnaire::class,
-'choice_label' => 'id',
-'multiple' => true,
+                'choice_label' => 'id',
+                'multiple' => true,
             ])
         ;
     }

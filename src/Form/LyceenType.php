@@ -5,12 +5,17 @@ namespace App\Form;
 use App\Entity\Lycee;
 use App\Entity\Lyceen;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class LyceenType extends AbstractType
 {
@@ -18,36 +23,52 @@ class LyceenType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => [
-                    'placeholder' => 'nom@lycee.fr',
-                ],
-                'required' => false,
+                'label' => "Adresse e-mail",
                 'constraints' => [
-                    new NotBlank(),
+                    new Email([
+                        'message' => 'L\'adresse email "{{ value }}" n\'est pas valide.',
+                        'mode' => 'strict',
+                    ]),
+                ],
+                'attr' => [
+                    'placeholder' => 'example@email.com',
                 ],
             ])
-            ->add('telephone', null, [
-                'attr' => [
-                    'placeholder' => '0612345678',
-                ],
+            ->add('telephone', TelType::class, [
+                'label' => 'Téléphone mobile',
                 'constraints' => [
-                    new NotBlank(),
+                    new Length([
+                        'min' => 10,
+                        'max' => 14,
+                        'minMessage' => 'Le numéro de téléphone doit avoir au moins {{ limit }} chiffres.',
+                        'maxMessage' => 'Le numéro de téléphone ne peut pas avoir plus de {{ limit }} chiffres.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^\+?\d+$/',
+                        'message' => 'Le numéro de téléphone doit contenir uniquement des chiffres et éventuellement commencer par un signe plus (+).',
+                    ]),
                 ],
+                'attr' => [
+                    'placeholder' => '06 XX XX XX XX',
+                ],
+            ])
+            ->add('dateInscription', DateType::class, [
+                'label' => 'Date d\'inscription',
+                'widget' => 'single_text',
             ])
             ->add('section', ChoiceType::class, [
                 'choices' => [
-                    'Seconde' => 'seconde',
-                    'Première' => 'Premiere',
-                    'Terminale' => 'terminale',
+                    'Seconde' => 'Seconde',
+                    'Première' => 'Première',
+                    'Terminale' => 'Terminale',
                 ],
-                'data' => 'seconde',
-                'expanded' => true,
-                'multiple' => false,
             ])
             ->add('lycee', EntityType::class, [
-                'choice_label' => 'nom',
+                'label' => 'Lycée',
                 'class' => Lycee::class,
-            ]);
+                'choice_label' => 'id',
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
