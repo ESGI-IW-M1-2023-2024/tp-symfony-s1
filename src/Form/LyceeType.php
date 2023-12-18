@@ -12,7 +12,12 @@ class LyceeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
+            ->add('nom', null, [
+                'label' => 'Lycée',
+                'attr' => [
+                    'placeholder' => 'Nom du lycée',
+                ],
+             ])
         ;
     }
 
