@@ -32,6 +32,7 @@ class LyceenController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $lyceen->setDateInscription(new \DateTime());
             $entityManager->persist($lyceen);
             $entityManager->flush();
@@ -53,11 +54,20 @@ class LyceenController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $request->getSession()->getFlashBag()->set('error', '');
             $lyceen->setDateInscription(new \DateTime());
+
+            $formAteliers = array($form->get('atelier_1')->getData(), $form->get('atelier_2')->getData(), $form->get('atelier_3')->getData());
+            $has_duplicates = count($formAteliers) !== count(array_unique($formAteliers)) && !in_array(null, $formAteliers);
+            if ($has_duplicates) {
+                $this->addFlash('error', 'Vous ne pouvez pas vous inscrire à plusieurs ateliers identiques.');
+                return $this->redirectToRoute('app_lyceen_inscription');
+            }
+
             $entityManager->persist($lyceen);
             $entityManager->flush();
 
-            $mailSender = new Mail($mailer,$_ENV['MAILER_FROM']);
+            $mailSender = new Mail($mailer, $_ENV['MAILER_FROM']);
             $mailSender->sendMailAfterRegistration($lyceen->getEmail(), [
                 'lyceen' => $lyceen,
             ]);
@@ -101,7 +111,7 @@ class LyceenController extends AbstractController
     #[Route('/{id}', name: 'app_lyceen_delete', methods: ['POST'])]
     public function delete(Request $request, Lyceen $lyceen, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$lyceen->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $lyceen->getId(), $request->request->get('_token'))) {
             $entityManager->remove($lyceen);
             $entityManager->flush();
         }

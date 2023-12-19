@@ -41,6 +41,10 @@ class Atelier
     #[ORM\ManyToMany(targetEntity: Lyceen::class, mappedBy: 'ateliers')]
     private Collection $lyceens;
 
+    public function __toString(): string
+    {
+        return $this->id.' - '.$this->nom.' - '.$this->heure;
+    }
     public function __construct()
     {
         $this->metiers = new ArrayCollection();
