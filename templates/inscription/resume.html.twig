@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription par Lycee index{% endblock %}
+
+{% block body %}
+    <h1>Resumé inscription {{ lyceen.email }}</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Date d'inscription</th>
+            <th>Section</th>
+            <th>Lycée</th>
+            <th>Ateliers</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ lyceen.email }}</td>
+                <td>{{ lyceen.telephone }}</td>
+                <td>{{ lyceen.dateInscription ? lyceen.dateInscription|date('Y-m-d') : '' }}</td>
+                <td>{{ lyceen.section }}</td>
+                <td>{{ lyceen.lycee.nom }}</td>
+                <td>
+                    <ul>
+                        {% for atelier in lyceen.ateliers %}
+                            <li>{{ atelier.nom }} {{ atelier.heure }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_atelier_new') }}">Create new</a>
+{% endblock %}
+
