@@ -25,8 +25,8 @@
                     <td>{{ atelier.id }}</td>
                     <td>{{ atelier.nom }}</td>
                     <td>{{ atelier.heure }}</td>
-                    <td>{{ atelier.secteur }}</td>
-                    <td>{{ atelier.salle }}</td>
+                    <td>{{ atelier.secteur.nom }}</td>
+                    <td>{{ atelier.salle.nom }}</td>
                     <td>
                         <ul>
                             {% for metier in atelier.metiers %}

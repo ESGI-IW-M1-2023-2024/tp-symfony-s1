@@ -3,6 +3,11 @@
 {% block title %}Inscription Lycéen{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('error') %}
+        <div class="flash-error">
+            {{ message }}
+        </div>
+    {% endfor %}
     <h1>Inscription Lycéen</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}

@@ -2,19 +2,19 @@
 
 namespace App\Form;
 
+use App\Entity\Atelier;
 use App\Entity\Lycee;
 use App\Entity\Lyceen;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
 class LyceenType extends AbstractType
@@ -52,10 +52,6 @@ class LyceenType extends AbstractType
                     'placeholder' => '06 XX XX XX XX',
                 ],
             ])
-            ->add('dateInscription', DateType::class, [
-                'label' => 'Date d\'inscription',
-                'widget' => 'single_text',
-            ])
             ->add('section', ChoiceType::class, [
                 'choices' => [
                     'Seconde' => 'Seconde',
@@ -68,7 +64,48 @@ class LyceenType extends AbstractType
                 'class' => Lycee::class,
                 'choice_label' => 'nom',
             ])
-        ;
+            ->add('atelier_1', EntityType::class, [
+                'label' => 'Choix Atelier 1',
+                'class' => Atelier::class,
+                'mapped' => false,
+                'choice_label' => 'nom',
+                'group_by' => function(Atelier $atelier) {
+                    return $atelier->getHeure();
+                },
+                'multiple' => false,
+                'expanded' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez choisir au moins un atelier.',
+                    ]),
+                ]
+            ])->add('atelier_2', EntityType::class, [
+                'label' => 'Choix Atelier 2',
+                'class' => Atelier::class,
+                'mapped' => false,
+                'choice_label' => 'nom',
+                'group_by' => function(Atelier $atelier) {
+                    return $atelier->getHeure();
+                },
+                'multiple' => false,
+                'expanded' => false,
+                'required' => false,
+                'placeholder' => "Pas d'atelier",
+                'empty_data' => null,
+            ])->add('atelier_3', EntityType::class, [
+                'label' => 'Choix Atelier 3',
+                'class' => Atelier::class,
+                'mapped' => false,
+                'choice_label' => 'nom',
+                'group_by' => function(Atelier $atelier) {
+                    return $atelier->getHeure();
+                },
+                'multiple' => false,
+                'expanded' => false,
+                'required' => false,
+                'empty_data' => null,
+                'placeholder' => "Pas d'atelier",
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
