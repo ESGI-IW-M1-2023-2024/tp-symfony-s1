@@ -64,6 +64,12 @@ class LyceenController extends AbstractController
                 return $this->redirectToRoute('app_lyceen_inscription');
             }
 
+            foreach ($formAteliers as $atelier) {
+                if ($atelier) {
+                    $lyceen->addAtelier($atelier);
+                }
+            }
+
             $entityManager->persist($lyceen);
             $entityManager->flush();
 
@@ -72,7 +78,9 @@ class LyceenController extends AbstractController
                 'lyceen' => $lyceen,
             ]);
 
-            return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_inscriptionapp_inscription_resume', [
+                'id' => $lyceen->getId(),
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('lyceen/inscription.html.twig', [

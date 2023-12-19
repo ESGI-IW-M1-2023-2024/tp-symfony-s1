@@ -27,6 +27,18 @@
                 <th>Section</th>
                 <td>{{ lyceen.section }}</td>
             </tr>
+        <tr>
+            <th>Ateliers</th>
+            <td>
+                <ul>
+                    {% for atelier in lyceen.ateliers %}
+                        <li>
+                            <a href="{{ path('app_atelier_show', {'id': atelier.id}) }}">{{ atelier.nom }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
         </tbody>
     </table>
 
