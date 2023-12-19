@@ -31,6 +31,16 @@ class LyceenRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    public function findByAtelier($idAtelier): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.atelier = :val')
+            ->setParameter('val', $idAtelier)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    /**
 //     * @return Lyceen[] Returns an array of Lyceen objects
