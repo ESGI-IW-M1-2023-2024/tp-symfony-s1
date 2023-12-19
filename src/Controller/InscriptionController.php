@@ -2,16 +2,51 @@
 
 namespace App\Controller;
 
+use App\Repository\AtelierRepository;
 use App\Repository\LyceenRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/inscription', name: 'app_inscription')]
 class InscriptionController extends AbstractController
 {
+    #[Route('/', name: 'app_inscription_index')]
+    public function index(Request $request, AtelierRepository $atelierRepository)
+    {
+        $idAtelier = $request->query->get('id');
+        $creneau = $request->query->get('creneau');
+
+        if ($idAtelier) {
+            $ateliers = $atelierRepository->findBy(['id' => $idAtelier]);
+        } else if ($creneau) {
+            $ateliers = $atelierRepository->findBy(['heure' => $creneau]);
+        } else {
+            $ateliers = $atelierRepository->findAll();
+        }
+
+        $response = [];
+
+        foreach ($ateliers as $atelier) {
+            $response[] = [
+                'id' => $atelier->getId(),
+                'nom' => $atelier->getNom(),
+                'heure' => $atelier->getHeure(),
+                'secteur' => $atelier->getSecteur()->getNom(),
+                'salle' => $atelier->getSalle()->getNom(),
+                'metiers' => $atelier->getMetiers(),
+                'ressources' => $atelier->getRessources(),
+                'nbIntervenants' => sizeof($atelier->getIntervenants()),
+                'nbLyceens' => sizeof($atelier->getLyceens()),
+            ];
+        }
+
+        return $this->json($response, 200, [], ['groups' => 'ateliers:read']);
+    }
+
     #[Route('/byLycee/{idLycee}', name: 'app_inscription_par_lycee')]
-    public function index($idLycee, LyceenRepository $lyceenRepository): Response
+    public function byLycee($idLycee, LyceenRepository $lyceenRepository): Response
     {
         $lyceens = $lyceenRepository->findByLycee($idLycee);
         $ateliers = [];
