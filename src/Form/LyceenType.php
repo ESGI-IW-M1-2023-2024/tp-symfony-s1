@@ -66,7 +66,7 @@ class LyceenType extends AbstractType
             ->add('lycee', EntityType::class, [
                 'label' => 'Lycée',
                 'class' => Lycee::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
         ;
     }
