@@ -32,7 +32,7 @@ class Atelier
     #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Metier::class)]
     private Collection $metiers;
 
-    #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Ressource::class)]
+    #[ORM\OneToMany(mappedBy: 'atelier', targetEntity: Ressource::class, cascade: ['persist'])]
     private Collection $ressources;
 
     #[ORM\ManyToMany(targetEntity: Intervenant::class, inversedBy: 'ateliers')]

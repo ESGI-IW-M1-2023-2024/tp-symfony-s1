@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Atelier;
 use App\Form\AtelierType;
 use App\Repository\AtelierRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,24 @@ class AtelierController extends AbstractController
     }
 
     #[Route('/new', name: 'app_atelier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $atelier = new Atelier();
         $form = $this->createForm(AtelierType::class, $atelier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $ressources = $form->get('ressources')->getData();
+            // dd($form);
+
+            // dd($form->get('ressources')->getData());
+            foreach ($ressources as $ressource) {
+                $atelier->addRessource($ressource);
+            }
+            dd($ressources);
+
+
             $entityManager->persist($atelier);
             $entityManager->flush();
 

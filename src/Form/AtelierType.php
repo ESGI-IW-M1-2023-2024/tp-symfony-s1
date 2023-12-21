@@ -10,6 +10,7 @@ use App\Entity\Secteur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -49,11 +50,11 @@ class AtelierType extends AbstractType
                 'multiple' => true,
                 'placeholder' => 'Intervenants disponible',
             ])
-            ->add('lyceens', EntityType::class, [
-                'class' => Lyceen::class,
-                'choice_label' => 'email',
-                'multiple' => true,
-                'placeholder' => 'Lycéens participants',
+            ->add('ressources', CollectionType::class, [
+                'entry_type' => RessourceType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
             ])
         ;
     }
