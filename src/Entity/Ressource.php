@@ -17,7 +17,7 @@ class Ressource
     private ?string $type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Contenu = null;
+    private ?string $contenu = null;
 
     #[ORM\ManyToOne(inversedBy: 'ressources')]
     #[ORM\JoinColumn(nullable: false)]
@@ -45,12 +45,12 @@ class Ressource
 
     public function getContenu(): ?string
     {
-        return $this->Contenu;
+        return $this->contenu;
     }
 
-    public function setContenu(string $Contenu): static
+    public function setContenu(string $contenu): static
     {
-        $this->Contenu = $Contenu;
+        $this->contenu = $contenu;
 
         return $this;
     }

@@ -39,12 +39,14 @@ class RessourceType extends AbstractType
                 'attr' => [
                     'placeholder' => 'URL de la ressource... ',
                 ],
+            'required' => false,
             ])
             ->add('contenu', FileType::class, [
                 'attr' => [
                     'placeholder' => 'Contenu de la ressource... ',
                 ],
             'required' => false,
+            'mapped' => false,
             'constraints' => [
                 new File([
                     'maxSize' => '1024k',
@@ -55,8 +57,8 @@ class RessourceType extends AbstractType
                     'mimeTypesMessage' => 'Please upload a valid PDF document',
                 ])
             ],
+
         ])
-        ->addEventSubscriber(new TransformFileUploadedListener($this->fileUploader))
         ;
     }
 
