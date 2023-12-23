@@ -20,11 +20,18 @@ class FileUploader
     $safeFilename = $this->slugger->slug($originalFilename);
     $fileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
-    try {
-      $file->move($this->getTargetDirectory(), $fileName);
-    } catch (FileException $e) {
-      return false;
+    if (!file_exists($this->getTargetDirectory())) {
+      mkdir($this->getTargetDirectory(), 0777, true);
     }
+
+    if (!file_exists($this->getTargetDirectory() . '/' . $fileName)) {
+      try {
+        $file->move($this->getTargetDirectory(), $fileName);
+      } catch (FileException $e) {
+        return false;
+      }
+    }
+
 
     return $fileName;
   }

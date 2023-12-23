@@ -7,7 +7,7 @@ use App\Form\AtelierType;
 use App\Repository\AtelierRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
-use FileResourceHandler;
+use App\Handler\FileResourceHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/atelier')]
 class AtelierController extends AbstractController
 {
+
+    public function __construct(
+        private FileResourceHandler $fileResourceHandler
+    ) {
+    }
+
     #[Route('/', name: 'app_atelier_index', methods: ['GET'])]
     public function index(AtelierRepository $atelierRepository): Response
     {
@@ -25,7 +31,7 @@ class AtelierController extends AbstractController
     }
 
     #[Route('/new', name: 'app_atelier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, FileResourceHandler $fileResourceHandler): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $atelier = new Atelier();
         $form = $this->createForm(AtelierType::class, $atelier);
@@ -33,7 +39,7 @@ class AtelierController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $fileResourceHandler->handle($atelier, $form);
+            $this->fileResourceHandler->handleNew($atelier, $form);
             
             $entityManager->persist($atelier);
             $entityManager->flush();
@@ -62,6 +68,8 @@ class AtelierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->fileResourceHandler->handleEdit($atelier, $form);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);

@@ -31,5 +31,9 @@ services:
         arguments:
             $targetDirectory: '%brochures_directory%'
 
+    App\Handler\FileResourceHandler:
+        arguments:
+            uploadDirectory: '%brochures_directory%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
