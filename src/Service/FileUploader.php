@@ -14,7 +14,7 @@ class FileUploader
   ) {
   }
 
-  public function upload(UploadedFile $file): string
+  public function upload(UploadedFile $file, $path = null): string
   {
     $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
     $safeFilename = $this->slugger->slug($originalFilename);
@@ -24,7 +24,7 @@ class FileUploader
       mkdir($this->getTargetDirectory(), 0777, true);
     }
 
-    if (!file_exists($this->getTargetDirectory() . '/' . $fileName)) {
+    if (!file_exists($this->getTargetDirectory() . '/' . $path)) {
       try {
         $file->move($this->getTargetDirectory(), $fileName);
       } catch (FileException $e) {

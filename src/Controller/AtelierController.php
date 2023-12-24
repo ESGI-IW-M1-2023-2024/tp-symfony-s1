@@ -85,6 +85,8 @@ class AtelierController extends AbstractController
     public function delete(Request $request, Atelier $atelier, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$atelier->getId(), $request->request->get('_token'))) {
+
+            $this->fileResourceHandler->handleDelete($atelier);
             $entityManager->remove($atelier);
             $entityManager->flush();
         }
