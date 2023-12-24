@@ -10,8 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/ressource')]
+#[Route('admin/ressource')]
+#[IsGranted('ROLE_ADMIN')]
 class RessourceController extends AbstractController
 {
     #[Route('/', name: 'app_ressource_index', methods: ['GET'])]
