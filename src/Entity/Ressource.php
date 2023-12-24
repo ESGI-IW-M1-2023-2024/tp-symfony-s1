@@ -16,12 +16,15 @@ class Ressource
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Contenu = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $contenu = null;
 
     #[ORM\ManyToOne(inversedBy: 'ressources')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Atelier $atelier = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url = null;
 
     public function getId(): ?int
     {
@@ -42,12 +45,12 @@ class Ressource
 
     public function getContenu(): ?string
     {
-        return $this->Contenu;
+        return $this->contenu;
     }
 
-    public function setContenu(string $Contenu): static
+    public function setContenu(string $contenu): static
     {
-        $this->Contenu = $Contenu;
+        $this->contenu = $contenu;
 
         return $this;
     }
@@ -60,6 +63,18 @@ class Ressource
     public function setAtelier(?Atelier $atelier): static
     {
         $this->atelier = $atelier;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): static
+    {
+        $this->url = $url;
 
         return $this;
     }

@@ -6,6 +6,7 @@
 parameters:
 
     mailer_from: env(MAILER_FROM)
+    brochures_directory: '%kernel.project_dir%/public/uploads/brochures'
 
 services:
     # default configuration for services in *this* file
@@ -25,6 +26,14 @@ services:
     App\Service\Mail:
         arguments:
             $from : '%mailer_from%'
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%brochures_directory%'
+
+    App\Handler\FileResourceHandler:
+        arguments:
+            $uploadDirectory: '%brochures_directory%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

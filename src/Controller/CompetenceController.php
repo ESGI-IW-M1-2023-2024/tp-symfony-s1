@@ -10,8 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/competence')]
+#[Route('admin/competence')]
+#[IsGranted('ROLE_ADMIN')]
 class CompetenceController extends AbstractController
 {
     #[Route('/', name: 'app_competence_index', methods: ['GET'])]

@@ -3,3 +3,6 @@
 body {
     background-color: skyblue;
 }
+.btn {
+    @extend .btn-primary;
+}

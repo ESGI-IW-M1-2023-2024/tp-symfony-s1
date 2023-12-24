@@ -10,8 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/intervenant')]
+#[Route('admin/intervenant')]
+#[IsGranted('ROLE_ADMIN')]
 class IntervenantController extends AbstractController
 {
     #[Route('/', name: 'app_intervenant_index', methods: ['GET'])]

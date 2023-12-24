@@ -12,8 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/lyceen')]
+#[Route('admin/lyceen')]
+#[IsGranted('ROLE_ADMIN')]
 class LyceenController extends AbstractController
 {
     #[Route('/', name: 'app_lyceen_index', methods: ['GET'])]
