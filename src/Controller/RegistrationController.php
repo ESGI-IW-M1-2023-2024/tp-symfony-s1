@@ -40,10 +40,20 @@ class RegistrationController extends AbstractController
             );
 
             $type = $form->get('type')->getData();
-            if ('admin' == $type) {
-                $user->addRoles(['ROLE_ADMIN']);
-            } else {
-                $user->setEntity($type);
+            switch ($type) {
+                case 'admin':
+                    $user->addRoles(['ROLE_ADMIN']);
+                    break;
+                case 'App\Entity\Lyceen':
+                    $user->addRoles(['ROLE_LYCEEN']);
+                    $user->setEntity($type);
+                    break;
+                case 'App\Entity\Lycee':
+                    $user->addRoles(['ROLE_LYCEE']);
+                    $user->setEntity($type);
+                    break;
+                default:
+                    break;
             }
 
             $this->entityManager->persist($user);
