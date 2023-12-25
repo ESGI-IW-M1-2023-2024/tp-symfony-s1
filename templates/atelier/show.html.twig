@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{atelier.nom}} - Atelier{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Nom</h2>
+      <p>{{atelier.nom}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Heure</h2>
+      <p>{{atelier.heure}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Salle</h2>
+      <p>{{atelier.salle.nom}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Métiers</h2>
+      {% for metier in atelier.metiers %}
+      <p>{{ loop.first ? ',' : '' }}{{metier.nom}}</p>
+      {% else %}
+      <p>Aucun métier</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Nombre de participants</h2>
+      <p>{{atelier.lyceens|length}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Intervenants</h2>
+      {% if atelier.intervenants is not empty %}
+      <ul>
+        {% for intervenant in atelier.intervenants %}
+        <li>{{intervenant.prenom}} {{intervenant.nom}}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>Aucun formateur</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Ressources</h2>
+      {% if atelier.ressources is not empty %}
+      <ul>
+        {% for ressource in atelier.ressources %}
+        <li>
+          <a href="{% if ressource.type == 'pdf' %}{{asset('uploads/brochures/' ~ ressource.contenu)}}{% else %}{{ressource.url}}{% endif %}"
+            target="_blank">
+            {{ 'Ressource n°' ~ loop.index }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>Aucun lyceen</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endblock %}

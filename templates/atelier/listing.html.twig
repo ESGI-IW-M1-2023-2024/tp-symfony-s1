@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des ateliers{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% if ateliers is not empty %}
+    <div class="row fw-bold mb-3">
+        <div class="col">
+            Nom
+        </div>
+        <div class="col">
+            Heure
+        </div>
+        <div class="col">
+            Salle
+        </div>
+        <div class="col">
+            Métiers
+        </div>
+    </div>
+    {% endif %}
+    {% for atelier in ateliers %}
+    <div class="row">
+        <div class="col">
+            <a href="{{ path('app_atelier_public_show', {'id': atelier.id}) }}">{{atelier.nom}}</a>
+        </div>
+        <div class="col">
+            {{atelier.heure}}
+        </div>
+        <div class="col">
+            {{atelier.salle.nom}}
+        </div>
+        <div class="col">
+            {% for metier in atelier.metiers %}
+            {{ loop.first ? ',' : '' }}{{metier.nom}}
+            {% else %}
+            Aucun métier
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
