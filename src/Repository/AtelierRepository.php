@@ -21,28 +21,17 @@ class AtelierRepository extends ServiceEntityRepository
         parent::__construct($registry, Atelier::class);
     }
 
-//    /**
-//     * @return Atelier[] Returns an array of Atelier objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Atelier
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Atelier[] Returns an array of Atelier objects
+     */
+    public function findAllOrderByLyceen(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->innerJoin('a.lyceens', 'l')
+            ->orderBy('a.id', 'l')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
