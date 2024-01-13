@@ -8,7 +8,7 @@
       {% for child in form.children %}
         <li {{ stimulus_target('form-collection', 'field') }}>
           {{ form_widget(child) }}
-          <button type="button" class="btn btn-danger btn-sm remove-item" data-action="form-collection#removeItem">
+          <button type="button" class="btn btn-danger btn-sm remove-item" {{ stimulus_action('form-collection', 'removeItem' ) }}>
               Retirer
           </button>
         </li>
