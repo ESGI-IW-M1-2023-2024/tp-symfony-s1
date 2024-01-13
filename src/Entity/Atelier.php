@@ -216,4 +216,9 @@ class Atelier
 
         return $this;
     }
+
+    public function countLyceens(){
+        return count($this->getLyceens());
+    }
+
 }
