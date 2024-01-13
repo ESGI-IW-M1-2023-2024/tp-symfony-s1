@@ -42,14 +42,14 @@ class RegistrationController extends AbstractController
             $type = $form->get('type')->getData();
             switch ($type) {
                 case 'admin':
-                    $user->addRoles(['ROLE_ADMIN']);
+                    $user->setRoles(['ROLE_ADMIN']);
                     break;
                 case 'App\Entity\Lyceen':
-                    $user->addRoles(['ROLE_LYCEEN']);
+                    $user->setRoles(['ROLE_LYCEEN']);
                     $user->setEntity($type);
                     break;
                 case 'App\Entity\Lycee':
-                    $user->addRoles(['ROLE_LYCEE']);
+                    $user->setRoles(['ROLE_LYCEE']);
                     $user->setEntity($type);
                     break;
                 default:

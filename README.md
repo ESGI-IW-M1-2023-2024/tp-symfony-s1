@@ -1,4 +1,12 @@
-# Symfony Docker
+# Launch the project
+
+1. `docker compose up -d`
+2. `docker compose exec php /bin/sh`
+3. Inside the container `composer install`
+4. Inside the container `npm i`
+5. Inside the container `npm run dev` to buils assets (js and scss) or `npm run watch` to run the watcher instead of run the builder every time you change your assets
+
+## Symfony Docker
 
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
 with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
