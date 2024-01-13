@@ -15,6 +15,12 @@
         {% endblock %}
     </head>
     <body>
+        {{ include("layout/header.html.twig") }}
+        
+        {% if is_granted('ROLE_ADMIN') %}
+        {# Mettre les liens des différentes entités et page de stats demandées dans le tp #}
+        {{ include("layout/admin/sidebar.html.twig") }}
+        {% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>
