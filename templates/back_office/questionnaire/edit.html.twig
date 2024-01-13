@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Questionnaire</h1>
 
-    {{ include('questionnaire/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back_office/questionnaire/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_questionnaire_index') }}">back to list</a>
 
-    {{ include('questionnaire/_delete_form.html.twig') }}
+    {{ include('back_office/questionnaire/_delete_form.html.twig') }}
 {% endblock %}

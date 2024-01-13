@@ -21,7 +21,7 @@ class LyceenController extends AbstractController
     #[Route('/', name: 'app_lyceen_index', methods: ['GET'])]
     public function index(LyceenRepository $lyceenRepository): Response
     {
-        return $this->render('lyceen/index.html.twig', [
+        return $this->render('back_office/lyceen/index.html.twig', [
             'lyceens' => $lyceenRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class LyceenController extends AbstractController
             return $this->redirectToRoute('app_lyceen_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('lyceen/new.html.twig', [
+        return $this->render('back_office/lyceen/new.html.twig', [
             'lyceen' => $lyceen,
             'form' => $form,
         ]);
@@ -51,7 +51,7 @@ class LyceenController extends AbstractController
     #[Route('/{id}', name: 'app_lyceen_show', methods: ['GET'])]
     public function show(Lyceen $lyceen): Response
     {
-        return $this->render('lyceen/show.html.twig', [
+        return $this->render('back_office/lyceen/show.html.twig', [
             'lyceen' => $lyceen,
         ]);
     }
@@ -68,7 +68,7 @@ class LyceenController extends AbstractController
             return $this->redirectToRoute('app_lyceen_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('lyceen/edit.html.twig', [
+        return $this->render('back_office/lyceen/edit.html.twig', [
             'lyceen' => $lyceen,
             'form' => $form,
         ]);

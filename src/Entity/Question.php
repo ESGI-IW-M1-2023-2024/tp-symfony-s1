@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -26,6 +27,9 @@ class Question
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class)]
     private Collection $reponses;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $choices = null;
 
     public function __construct()
     {
@@ -115,6 +119,18 @@ class Question
                 $reponse->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getChoices(): ?array
+    {
+        return $this->choices;
+    }
+
+    public function setChoices(?array $choices): static
+    {
+        $this->choices = $choices;
 
         return $this;
     }

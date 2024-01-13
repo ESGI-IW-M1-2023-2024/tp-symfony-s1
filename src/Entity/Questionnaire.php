@@ -16,11 +16,11 @@ class Questionnaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $annee = null;
-
     #[ORM\ManyToMany(targetEntity: Question::class, inversedBy: 'questionnaires')]
     private Collection $questions;
+
+    #[ORM\Column]
+    private ?int $annee = null;
 
     public function __construct()
     {
@@ -30,18 +30,6 @@ class Questionnaire
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getAnnee(): ?\DateTimeInterface
-    {
-        return $this->annee;
-    }
-
-    public function setAnnee(\DateTimeInterface $annee): static
-    {
-        $this->annee = $annee;
-
-        return $this;
     }
 
     /**
@@ -64,6 +52,18 @@ class Questionnaire
     public function removeQuestion(Question $question): static
     {
         $this->questions->removeElement($question);
+
+        return $this;
+    }
+
+    public function getAnnee(): ?int
+    {
+        return $this->annee;
+    }
+
+    public function setAnnee(int $annee): static
+    {
+        $this->annee = $annee;
 
         return $this;
     }

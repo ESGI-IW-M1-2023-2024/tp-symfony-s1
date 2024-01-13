@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <th>Annee</th>
-                <td>{{ questionnaire.annee ? questionnaire.annee|date('Y-m-d') : '' }}</td>
+                <td>{{ questionnaire.annee }}</td>
             </tr>
         </tbody>
     </table>
@@ -22,5 +22,5 @@
 
     <a href="{{ path('app_questionnaire_edit', {'id': questionnaire.id}) }}">edit</a>
 
-    {{ include('questionnaire/_delete_form.html.twig') }}
+    {{ include('back_office/questionnaire/_delete_form.html.twig') }}
 {% endblock %}
