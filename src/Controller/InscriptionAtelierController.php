@@ -7,14 +7,15 @@ use App\Form\LyceenType;
 use App\Service\Mail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+//use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class InscriptionAtelierController extends AbstractController
 {
-    #[Route('/inscription', name: 'app_lyceen_inscription', methods: ['GET', 'POST'])]
+    #[Route('/inscriptions', name: 'app_lyceen_inscription', methods: ['GET', 'POST'])]
     public function inscription(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $lyceen = new Lyceen();
@@ -22,7 +23,7 @@ class InscriptionAtelierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $request->getSession()->getFlashBag()->set('error', '');
+            //$request->getSession()->getFlashBag()->set('error', '');
             $lyceen->setDateInscription(new \DateTime());
 
             $formAteliers = array($form->get('atelier_1')->getData(), $form->get('atelier_2')->getData(), $form->get('atelier_3')->getData());
