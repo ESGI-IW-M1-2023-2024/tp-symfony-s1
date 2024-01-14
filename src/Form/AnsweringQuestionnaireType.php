@@ -2,11 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Question;
 use App\Entity\Questionnaire;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,23 +14,34 @@ class AnsweringQuestionnaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('questions', CollectionType::class, [
-                'entry_type' => OneQuestionType::class,
-                'entry_options' => [
-                    'label' => false,
-                ],
-                'allow_add' => false,
-                'allow_delete' => false,
-                'by_reference' => false,
-                'label' => false,
-            ]);
+        foreach ($options['questions'] as $question) {
+            if ($question->getType() === 'open') {
+                $builder->add($question->getId(), TextType::class, [
+                    'label' => $question->getIntitule(),
+                    'mapped' => false,
+                ]);
+            } else {
+                $builder->add($question->getId(), ChoiceType::class, [
+                    'label' => $question->getIntitule(),
+                    'mapped' => false,
+                    'choices' => $question->getChoices(),
+                    'choice_label' => function ($choice) {
+                        return $choice;
+                    },
+                    'expanded' => true,
+                    'multiple' => false,
+                ]);
+            }
+        }
+        $builder->add('submit', SubmitType::class, [
+            'label' => 'Envoyer',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => Questionnaire::class,
+        $resolver->setDefaults(['data_class' => null,
+            'questions' => [],
         ]);
     }
 }
