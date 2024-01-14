@@ -28,17 +28,11 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new NotNull([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -59,10 +53,21 @@ class RegistrationFormType extends AbstractType
                     'Lycée' => 'App\Entity\Lycee',
                     'Admin' => 'admin',
                 ],
+                'label' => 'Inscription en tant que',
                 'mapped' => false,
             ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'J\'accepte les termes et conditions',
+                'mapped' => false,
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Vous devez accepter les termes et conditions.',
+                    ]),
+                ],
+            ])
             ->add('save', SubmitType::class, [
-                'label' => 'Enregistrer',
+                'label' => 'Valider l\'inscription',
+                'attr' => ['class' => 'btn btn-primary w-100']
             ]);
     }
 

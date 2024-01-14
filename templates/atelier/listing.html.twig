@@ -3,42 +3,39 @@
 {% block title %}Liste des ateliers{% endblock %}
 
 {% block body %}
+<style>
+    body {background-color: #FFFFF2}
+</style>
 <div class="container">
     {% if ateliers is not empty %}
-    <div class="row fw-bold mb-3">
-        <div class="col">
-            Nom
-        </div>
-        <div class="col">
-            Heure
-        </div>
-        <div class="col">
-            Salle
-        </div>
-        <div class="col">
-            Métiers
-        </div>
-    </div>
-    {% endif %}
-    {% for atelier in ateliers %}
-    <div class="row">
-        <div class="col">
-            <a href="{{ path('app_atelier_public_show', {'id': atelier.id}) }}">{{atelier.nom}}</a>
-        </div>
-        <div class="col">
-            {{atelier.heure}}
-        </div>
-        <div class="col">
-            {{atelier.salle.nom}}
-        </div>
-        <div class="col">
-            {% for metier in atelier.metiers %}
-            {{ loop.first ? ',' : '' }}{{metier.nom}}
-            {% else %}
-            Aucun métier
+    <table class="table">
+        <thead>
+            <tr class="fw-bold">
+                <th scope="col">Nom</th>
+                <th scope="col">Heure</th>
+                <th scope="col">Salle</th>
+                <th scope="col">Métiers</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for atelier in ateliers %}
+            <tr>
+                <td><a href="{{ path('app_atelier_public_show', {'id': atelier.id}) }}">{{ atelier.nom }}</a></td>
+                <td>{{ atelier.heure }}</td>
+                <td>{{ atelier.salle.nom }}</td>
+                <td>
+                    {% for metier in atelier.metiers %}
+                        {{ loop.first ? '' : ', ' }}{{ metier.nom }}
+                    {% else %}
+                        Aucun métier
+                    {% endfor %}
+                </td>
+            </tr>
             {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No ateliers available.</p>
+    {% endif %}
 </div>
 {% endblock %}

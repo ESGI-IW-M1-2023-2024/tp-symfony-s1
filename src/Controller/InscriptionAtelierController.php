@@ -16,6 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class InscriptionAtelierController extends AbstractController
 {
+
     #[Route('/inscription', name: 'app_lyceen_inscription', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_LYCEEN')]
     public function inscription(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer, Security $security): Response
@@ -27,7 +28,7 @@ class InscriptionAtelierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $request->getSession()->getFlashBag()->set('error', '');
+            //$request->getSession()->getFlashBag()->set('error', '');
             $lyceen->setDateInscription(new \DateTime());
 
             $formAteliers = array($form->get('atelier_1')->getData(), $form->get('atelier_2')->getData(), $form->get('atelier_3')->getData());
@@ -59,15 +60,6 @@ class InscriptionAtelierController extends AbstractController
         return $this->render('inscription_atelier/index.html.twig', [
             'lyceen' => $lyceen,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/inscription/resume/{id}', name: 'app_inscription_resume', methods: ['GET'])]
-    #[IsGranted('ROLE_LYCEEN')]
-    public function resume(Lyceen $lyceen): Response
-    {
-        return $this->render('inscription_atelier/resume.html.twig', [
-            'lyceen' => $lyceen,
         ]);
     }
 }
