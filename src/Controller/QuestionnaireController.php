@@ -6,6 +6,7 @@ use App\Entity\Lyceen;
 use App\Entity\Questionnaire;
 use App\Entity\Reponse;
 use App\Form\AnsweringQuestionnaireType;
+use App\Service\Encrypt;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class QuestionnaireController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
+        private Encrypt $encrypt,
     ) {
     }
 
@@ -62,8 +64,8 @@ class QuestionnaireController extends AbstractController
 
             $this->entityManager->flush();
 
-            // $this->entityManager->persist($questionnaire);
-            // $this->entityManager->flush();
+            $this->encrypt->encryptUserPersonalData($this->getUser());
+            $this->encrypt->encryptStudentPersonalData($lyceen);
 
             return $this->redirectToRoute('app_questionnaire', ['id' => $id]);
         }
