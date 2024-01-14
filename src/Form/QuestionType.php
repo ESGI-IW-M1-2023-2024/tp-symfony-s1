@@ -7,6 +7,8 @@ use App\Entity\Questionnaire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,16 +25,24 @@ class QuestionType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'ouverte' => true,
-                    'fermée' => false,
+                'ouverte' => 'open',
+                'fermée' => 'close',
                 ],
                 'expanded' => true,
                 'multiple' => false,
-            ])
-            ->add('questionnaires', EntityType::class, [
-                'class' => Questionnaire::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+        ])
+            ->add('choices', CollectionType::class, [
+                'entry_type' => TextType::class,
+                'entry_options' => [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'Choix d\'une réponse',
+                    ],
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'Choix possibles de réponse (si fermée)',
             ])
         ;
     }

@@ -27,7 +27,7 @@ class AtelierController extends AbstractController
     #[Route('/', name: 'app_atelier_index', methods: ['GET'])]
     public function index(AtelierRepository $atelierRepository): Response
     {
-        return $this->render('atelier/index.html.twig', [
+        return $this->render('back_office/atelier/index.html.twig', [
             'ateliers' => $atelierRepository->findAll(),
         ]);
     }
@@ -49,7 +49,7 @@ class AtelierController extends AbstractController
             return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('atelier/new.html.twig', [
+        return $this->render('back_office/atelier/new.html.twig', [
             'atelier' => $atelier,
             'form' => $form,
         ]);
@@ -58,7 +58,7 @@ class AtelierController extends AbstractController
     #[Route('/{id}', name: 'app_atelier_show', methods: ['GET'])]
     public function show(Atelier $atelier): Response
     {
-        return $this->render('atelier/show.html.twig', [
+        return $this->render('back_office/atelier/show.html.twig', [
             'atelier' => $atelier,
         ]);
     }
@@ -77,7 +77,7 @@ class AtelierController extends AbstractController
             return $this->redirectToRoute('app_atelier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('atelier/edit.html.twig', [
+        return $this->render('back_office/atelier/edit.html.twig', [
             'atelier' => $atelier,
             'form' => $form,
         ]);

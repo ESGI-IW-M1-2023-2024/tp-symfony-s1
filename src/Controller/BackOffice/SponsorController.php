@@ -19,7 +19,7 @@ class SponsorController extends AbstractController
     #[Route('/', name: 'app_sponsor_index', methods: ['GET'])]
     public function index(SponsorRepository $sponsorRepository): Response
     {
-        return $this->render('sponsor/index.html.twig', [
+        return $this->render('back_office/sponsor/index.html.twig', [
             'sponsors' => $sponsorRepository->findAll(),
         ]);
     }
@@ -38,7 +38,7 @@ class SponsorController extends AbstractController
             return $this->redirectToRoute('app_sponsor_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('sponsor/new.html.twig', [
+        return $this->render('back_office/sponsor/new.html.twig', [
             'sponsor' => $sponsor,
             'form' => $form,
         ]);
@@ -47,7 +47,7 @@ class SponsorController extends AbstractController
     #[Route('/{id}', name: 'app_sponsor_show', methods: ['GET'])]
     public function show(Sponsor $sponsor): Response
     {
-        return $this->render('sponsor/show.html.twig', [
+        return $this->render('back_office/sponsor/show.html.twig', [
             'sponsor' => $sponsor,
         ]);
     }
@@ -64,7 +64,7 @@ class SponsorController extends AbstractController
             return $this->redirectToRoute('app_sponsor_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('sponsor/edit.html.twig', [
+        return $this->render('back_office/sponsor/edit.html.twig', [
             'sponsor' => $sponsor,
             'form' => $form,
         ]);

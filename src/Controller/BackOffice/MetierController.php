@@ -19,7 +19,7 @@ class MetierController extends AbstractController
     #[Route('/', name: 'app_metier_index', methods: ['GET'])]
     public function index(MetierRepository $metierRepository): Response
     {
-        return $this->render('metier/index.html.twig', [
+        return $this->render('back_office/metier/index.html.twig', [
             'metiers' => $metierRepository->findAll(),
         ]);
     }
@@ -38,7 +38,7 @@ class MetierController extends AbstractController
             return $this->redirectToRoute('app_metier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('metier/new.html.twig', [
+        return $this->render('back_office/metier/new.html.twig', [
             'metier' => $metier,
             'form' => $form,
         ]);
@@ -47,7 +47,7 @@ class MetierController extends AbstractController
     #[Route('/{id}', name: 'app_metier_show', methods: ['GET'])]
     public function show(Metier $metier): Response
     {
-        return $this->render('metier/show.html.twig', [
+        return $this->render('back_office/metier/show.html.twig', [
             'metier' => $metier,
         ]);
     }
@@ -64,7 +64,7 @@ class MetierController extends AbstractController
             return $this->redirectToRoute('app_metier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('metier/edit.html.twig', [
+        return $this->render('back_office/metier/edit.html.twig', [
             'metier' => $metier,
             'form' => $form,
         ]);
