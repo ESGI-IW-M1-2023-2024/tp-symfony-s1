@@ -1,5 +1,5 @@
 {%- block collection_widget -%}
-  <div 
+  <div
     {{ stimulus_controller('form-collection') }}
     data-form-collection-index-value="{{ form|length > 0 ? form|last.vars.name + 1 : 0 }}"
     {% if form.vars['allow_add'] == true %}
@@ -18,6 +18,6 @@
         </li>
       {% endfor %}
     </ul>
-    <button type="button" class="btn btn-success add-item" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter</button>
+    <button type="button" class="btn btn-success add-item" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une ressource</button>
   </div>
 {%- endblock collection_widget -%}

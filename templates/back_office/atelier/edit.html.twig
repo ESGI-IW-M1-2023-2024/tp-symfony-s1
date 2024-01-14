@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Atelier{% endblock %}
+{% block title %}Modification de l'atelier{% endblock %}
 
 {% block body %}
-    <h1>Edit Atelier</h1>
-
-    {{ include('back_office/atelier/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_atelier_index') }}">back to list</a>
-
-    {{ include('back_office/atelier/_delete_form.html.twig') }}
+    <h1 class="text-primary text-center">Modification de l'atelier</h1>
+    {{ include('back_office/atelier/_form.html.twig') }}
+    <div class="d-flex gap-3">
+        <a class="btn btn-primary" href="{{ path('app_atelier_index') }}">Retour à la liste</a>
+        {{ include('back_office/atelier/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

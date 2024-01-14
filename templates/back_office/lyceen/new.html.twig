@@ -3,9 +3,9 @@
 {% block title %}Inscription Lycéen{% endblock %}
 
 {% block body %}
-    <h1>Inscription Lycéen</h1>
+    <h1 class="text-center text-primary">Inscription Lycéen</h1>
 
     {{ include('back_office/lyceen/_form.html.twig') }}
 
-    <a href="{{ path('app_lyceen_index') }}">back to list</a>
+    <a class="btn btn-primary mt-2" href="{{ path('app_lyceen_index') }}">Retour à la liste</a>
 {% endblock %}
