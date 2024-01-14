@@ -1,0 +1,23 @@
+h1, h2{
+    color: $primary;
+    margin-bottom: 50px;
+}
+
+main{
+    width: 60%;
+    margin:auto;
+    border: 2px solid $primary;
+    border-radius: 10px;
+    padding: 30px;
+
+    .content{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+
+        .image_accueil{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+}

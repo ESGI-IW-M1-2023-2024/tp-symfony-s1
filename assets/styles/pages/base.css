@@ -1,0 +1,61 @@
+/*
+Error: Undefined variable: "$primary".
+        on line 2 of base.scss
+
+1: h1, h2{
+2:     color: $primary;
+3:     margin-bottom: 30px;
+4: }
+5: 
+6: main{
+7:     width: 60%;
+
+Backtrace:
+base.scss:2
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/script/tree/variable.rb:49:in `_perform'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/script/tree/node.rb:50:in `perform'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:398:in `visit_prop'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:440:in `block (2 levels) in visit_rule'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:440:in `map'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:440:in `block in visit_rule'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:438:in `visit_rule'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `map'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/root_node.rb:36:in `css_tree'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:383:in `run'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/base.rb:50:in `parse'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/base.rb:18:in `parse!'
+/usr/share/rubygems-integration/all/gems/sass-3.7.4/bin/sass:8:in `<top (required)>'
+/usr/bin/sass:25:in `load'
+/usr/bin/sass:25:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$primary\".\A         on line 2 of base.scss\A \A 1: h1, h2{\A 2:     color: $primary;\A 3:     margin-bottom: 30px;\A 4: }\A 5: \A 6: main{\A 7:     width: 60%;"; }

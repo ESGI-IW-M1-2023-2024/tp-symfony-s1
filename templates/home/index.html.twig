@@ -1,24 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Forum des métiers - Association HorizonProfessionnel{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <main>
+        <h1 class="text-center">Bienvenue sur la plateforme du forum de Découverte des Métiers !</h1>
+        <section class="content">
+            <div>
+                <h2>Plongez dans le Forum des Métiers!</h2>
+                <p>Nous sommes ravis de vous accueillir sur cette plateforme
+                    interactive dédiée au prochain Forum de Découverte des Métiers
+                    organisé par l'Association HorizonProfessionnel. Notre équipe de développeureuses a
+                    travaillé avec passion pour créer un espace en ligne convivial où
+                    vous pourrez explorer, vous inscrire et participer à cet événement
+                    incontournable dédié à la découverte professionnelle.
+                </p>
+            </div>
+            <img class="image_accueil" src="{{ asset('images/fdm.jpg') }}" alt=""/>
+        </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/app/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/app/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+       <section>
+           <h2>Le Forum</h2>
+           <p>Le Forum Découverte des Métiers est bien plus qu'une simple réunion en ligne.
+               C'est une opportunité unique de plonger dans le monde professionnel,
+               d'interagir avec des experts et de tracer les contours de votre avenir.
+               Que vous soyez en quête d'inspiration, de conseils concrets ou simplement
+               désireux d'explorer de nouveaux horizons, ce forum est conçu pour répondre
+               à vos besoins.
+           </p>
+       </section>
 
-<div>
-    <a class="btn btn-primary" href="/inscription/byLycee/1">S'inscrire</a>
-</div>
+
+    </main>
+
+{#<div class="example-wrapper">#}
+{#    <h1>Hello {{ controller_name }}! ✅</h1>#}
+
+{#    This friendly message is coming from:#}
+{#    <ul>#}
+{#        <li>Your controller at <code><a href="{{ '/app/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>#}
+{#        <li>Your template at <code><a href="{{ '/app/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>#}
+{#    </ul>#}
+{#</div>#}
+
 {% endblock %}

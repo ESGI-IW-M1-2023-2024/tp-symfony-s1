@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}S'inscrire{% endblock %}
 
 {% block body %}
-<h1>Register</h1>
+<main class="w-50 m-auto">
+    <h1 class="text-center">S'inscrire</h1>
+    <div  class="m-3 w-75 m-auto">
+        {{ form(registrationForm) }}
+    </div>
+</main>
 
-{{ form(registrationForm) }}
 {% endblock %}
