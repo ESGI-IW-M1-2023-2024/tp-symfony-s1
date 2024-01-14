@@ -19,7 +19,7 @@ class QuestionController extends AbstractController
     #[Route('/', name: 'app_question_index', methods: ['GET'])]
     public function index(QuestionRepository $questionRepository): Response
     {
-        return $this->render('question/index.html.twig', [
+        return $this->render('back_office/question/index.html.twig', [
             'questions' => $questionRepository->findAll(),
         ]);
     }
@@ -38,7 +38,7 @@ class QuestionController extends AbstractController
             return $this->redirectToRoute('app_question_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('question/new.html.twig', [
+        return $this->render('back_office/question/new.html.twig', [
             'question' => $question,
             'form' => $form,
         ]);
@@ -47,7 +47,7 @@ class QuestionController extends AbstractController
     #[Route('/{id}', name: 'app_question_show', methods: ['GET'])]
     public function show(Question $question): Response
     {
-        return $this->render('question/show.html.twig', [
+        return $this->render('back_office/question/show.html.twig', [
             'question' => $question,
         ]);
     }
@@ -64,7 +64,7 @@ class QuestionController extends AbstractController
             return $this->redirectToRoute('app_question_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('question/edit.html.twig', [
+        return $this->render('back_office/question/edit.html.twig', [
             'question' => $question,
             'form' => $form,
         ]);

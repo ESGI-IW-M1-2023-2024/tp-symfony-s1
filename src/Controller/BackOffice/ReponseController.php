@@ -19,7 +19,7 @@ class ReponseController extends AbstractController
     #[Route('/', name: 'app_reponse_index', methods: ['GET'])]
     public function index(ReponseRepository $reponseRepository): Response
     {
-        return $this->render('reponse/index.html.twig', [
+        return $this->render('back_office/reponse/index.html.twig', [
             'reponses' => $reponseRepository->findAll(),
         ]);
     }
@@ -38,7 +38,7 @@ class ReponseController extends AbstractController
             return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('reponse/new.html.twig', [
+        return $this->render('back_office/reponse/new.html.twig', [
             'reponse' => $reponse,
             'form' => $form,
         ]);
@@ -47,7 +47,7 @@ class ReponseController extends AbstractController
     #[Route('/{id}', name: 'app_reponse_show', methods: ['GET'])]
     public function show(Reponse $reponse): Response
     {
-        return $this->render('reponse/show.html.twig', [
+        return $this->render('back_office/reponse/show.html.twig', [
             'reponse' => $reponse,
         ]);
     }
@@ -64,7 +64,7 @@ class ReponseController extends AbstractController
             return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('reponse/edit.html.twig', [
+        return $this->render('back_office/reponse/edit.html.twig', [
             'reponse' => $reponse,
             'form' => $form,
         ]);

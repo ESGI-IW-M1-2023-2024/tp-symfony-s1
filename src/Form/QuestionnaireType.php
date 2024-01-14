@@ -20,7 +20,7 @@ class QuestionnaireType extends AbstractType
         $builder
             ->add('annee', ChoiceType::class, [
                 'choices' => array_combine($years, $years),
-                'placeholder' => $currentYear,
+            'placeholder' => 'Choix de l\'année',
             ])
             ->add('questions', EntityType::class, [
                 'class' => Question::class,

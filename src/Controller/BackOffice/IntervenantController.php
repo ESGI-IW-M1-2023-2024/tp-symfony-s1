@@ -19,7 +19,7 @@ class IntervenantController extends AbstractController
     #[Route('/', name: 'app_intervenant_index', methods: ['GET'])]
     public function index(IntervenantRepository $intervenantRepository): Response
     {
-        return $this->render('intervenant/index.html.twig', [
+        return $this->render('back_office/intervenant/index.html.twig', [
             'intervenants' => $intervenantRepository->findAll(),
         ]);
     }
@@ -38,7 +38,7 @@ class IntervenantController extends AbstractController
             return $this->redirectToRoute('app_intervenant_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('intervenant/new.html.twig', [
+        return $this->render('back_office/intervenant/new.html.twig', [
             'intervenant' => $intervenant,
             'form' => $form,
         ]);
@@ -47,7 +47,7 @@ class IntervenantController extends AbstractController
     #[Route('/{id}', name: 'app_intervenant_show', methods: ['GET'])]
     public function show(Intervenant $intervenant): Response
     {
-        return $this->render('intervenant/show.html.twig', [
+        return $this->render('back_office/intervenant/show.html.twig', [
             'intervenant' => $intervenant,
         ]);
     }
@@ -64,7 +64,7 @@ class IntervenantController extends AbstractController
             return $this->redirectToRoute('app_intervenant_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('intervenant/edit.html.twig', [
+        return $this->render('back_office/intervenant/edit.html.twig', [
             'intervenant' => $intervenant,
             'form' => $form,
         ]);
