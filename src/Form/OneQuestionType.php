@@ -13,21 +13,24 @@ class OneQuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('intitule')
-            ->add('type')
-            ->add('questionnaires', EntityType::class, [
-                'class' => Questionnaire::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
-        ;
+        dd($options);
+        foreach ($options['questions'] as $question) {
+            dd($question);
+            $builder->add('question', EntityType::class, [
+                'class' => Question::class,
+                'choices' => $options['questions'],
+                'choice_label' => 'question',
+                'label' => false,
+                'mapped' => false,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Question::class,
+            'test' => 'test',
         ]);
     }
 }
