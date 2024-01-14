@@ -3,7 +3,7 @@
 {% block title %}Atelier{% endblock %}
 
 {% block body %}
-    <h1>Atelier</h1>
+    <h1 class="text-center text-primary">Atelier</h1>
 
     <table class="table">
         <tbody>
@@ -22,9 +22,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_atelier_index') }}">back to list</a>
-
-    <a href="{{ path('app_atelier_edit', {'id': atelier.id}) }}">edit</a>
-
-    {{ include('back_office/atelier/_delete_form.html.twig') }}
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary" href="{{ path('app_atelier_index') }}">Retour à la liste</a>
+            <a class="btn btn-primary" href="{{ path('app_atelier_edit', {'id': atelier.id}) }}">Modifier</a>
+            {{ include('back_office/atelier/_delete_form.html.twig') }}
+        </div>
 {% endblock %}
