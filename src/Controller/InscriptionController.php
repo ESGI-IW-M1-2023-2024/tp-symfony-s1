@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/inscription', name: 'app_inscription')]
+#[Route('/inscription')]
 class InscriptionController extends AbstractController
 {
     #[Route('/', name: 'app_inscription_index')]
@@ -19,12 +19,17 @@ class InscriptionController extends AbstractController
         $creneau = $request->query->get('creneau');
 
         if ($idAtelier) {
-            $ateliers = $atelierRepository->findBy(['id' => $idAtelier]);
-        } else if ($creneau) {
-            $ateliers = $atelierRepository->findBy(['heure' => $creneau]);
+            if ($creneau) {
+                $ateliers = $atelierRepository->findOneBy(['id' => $idAtelier, 'heure' => $creneau]);
+            } else {
+                $ateliers = $atelierRepository->findOneBy(['id' => $idAtelier]);
+            }
+        } else if($creneau) {
+            $ateliers = $atelierRepository->findOneBy(['heure' => $creneau]);
         } else {
             $ateliers = $atelierRepository->findAll();
         }
+
 
         $response = [];
 
@@ -41,8 +46,7 @@ class InscriptionController extends AbstractController
                 'nbLyceens' => sizeof($atelier->getLyceens()),
             ];
         }
-
-        return $this->json($response, 200, [], ['groups' => 'ateliers:read']);
+        return $this->json($response);
     }
 
     #[Route('/byLycee/{idLycee}', name: 'app_inscription_par_lycee')]
