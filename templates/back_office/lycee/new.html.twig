@@ -3,9 +3,9 @@
 {% block title %}New Lycee{% endblock %}
 
 {% block body %}
-    <h1>Create new Lycee</h1>
+    <h1 class="text-center text-primary">Création d'un nouveau lycée</h1>
 
     {{ include('back_office/lycee/_form.html.twig') }}
 
-    <a href="{{ path('app_lycee_index') }}">back to list</a>
+    <a class="btn btn-primary mt-2" href="{{ path('app_lycee_index') }}">Retour à la liste</a>
 {% endblock %}
