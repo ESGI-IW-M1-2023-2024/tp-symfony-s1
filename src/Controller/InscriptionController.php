@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/inscription', name: 'app_inscription')]
 class InscriptionController extends AbstractController
 {
     #[Route('/byLycee/{idLycee}', name: 'app_inscription_par_lycee')]
@@ -25,7 +24,7 @@ class InscriptionController extends AbstractController
         ]);
     }
 
-    #[Route('/resume', name: 'app_inscription_resume', methods: ['GET','POST'])]
+    #[Route('/resume', name: 'app_inscription_resume')]
     public function resume(Request $request, LyceenRepository $lyceenRepository): Response
     {
         $id = $request->query->get('id');
