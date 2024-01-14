@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Lyceen;
 use App\Entity\User;
+use App\Form\LyceenType;
 use App\Form\RegistrationChooseEntityFormType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RegistrationController extends AbstractController
 {
@@ -79,13 +80,27 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $form = $this->createForm(RegistrationChooseEntityFormType::class, $user, [
-            'entity_related' => $user->getEntity(),
-        ]);
+        if ($this->security->isGranted('ROLE_LYCEEN')) {
+            $lyceen = new Lyceen();
+            $form = $this->createForm(LyceenType::class, $lyceen, [
+                'user' => $user,
+            ]);
+        } else {
+            $form = $this->createForm(RegistrationChooseEntityFormType::class, $user, [
+                'entity_related' => $user->getEntity(),
+            ]);
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRelatedEntityId($form->get('relatedEntityId')->getData()->getId());
+            if ($this->security->isGranted('ROLE_LYCEEN')) {
+                $lyceen->setDateInscription(new \DateTime());
+                $this->entityManager->persist($lyceen);
+                $user->setRelatedEntityId($lyceen->getId());
+            } else {
+                $user->setRelatedEntityId($form->get('relatedEntityId')->getData()->getId());
+            }
             $this->entityManager->flush();
 
             return $this->redirectToRoute('app_home');

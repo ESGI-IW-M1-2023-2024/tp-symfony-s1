@@ -21,7 +21,10 @@ class FileResourceHandler
 
     foreach ($ressources as $key => $ressource) {
       $file = $form->get('ressources')->all()[$key]->all()['contenu']->getData();
-      $this->handleNewOne($ressource, $atelier, $file);
+      if ($file !== null) {
+        $this->handleNewOne($ressource, $atelier, $file);
+      }
+      
     }
   }
 

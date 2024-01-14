@@ -42,6 +42,13 @@ class AtelierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->fileResourceHandler->handleNew($atelier, $form);
+
+            $resources = $form->get('ressources')->getData();
+
+            foreach ($resources as $resource) {
+                $resource->setAtelier($atelier);
+                $entityManager->persist($resource);
+            }
             
             $entityManager->persist($atelier);
             $entityManager->flush();
