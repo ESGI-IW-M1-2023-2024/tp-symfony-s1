@@ -3,8 +3,9 @@
 1. `docker compose up -d`
 2. `docker compose exec php /bin/sh`
 3. Inside the container `composer install`
-4. Inside the container `npm i`
-5. Inside the container `npm run dev` to buils assets (js and scss) or `npm run watch` to run the watcher instead of run the builder every time you change your assets
+4. Inside the container `php bin/console d:m:m` to update DB structure
+5. Inside the container `npm i`
+6. Inside the container `npm run dev` to buils assets (js and scss) or `npm run watch` to run the watcher instead of run the builder every time you change your assets
 
 ## Symfony Docker
 
