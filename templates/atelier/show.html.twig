@@ -4,30 +4,34 @@
 
 {% block body %}
 <style>
-  body{background-color : #FFFFF2}
+  body{background-color : #FFFFF2; display:flex ; flex-direction:column ; align-items:center}
+  .blue{color:#0B4F6C}
+  .row{background-color:white; width: 250px; margin:10px 0;border: 1px solid black; border-radius: 20px; margin: 5px 5px}
+  .containers{display:flex ; flex-direction:row ; flex-wrap:wrap; width:75%; }
 </style>
-<div class="container mt-4">
+<div class="containers mt-4">
+  <h1 class="blue mb-4 w-100">Atelier détail</h1>
   <div class="row">
     <div class="col">
-      <h2>Nom</h2>
+      <h4>Nom</h4>
       <p>{{atelier.nom}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <h2>Heure</h2>
+      <h4>Heure</h4>
       <p>{{atelier.heure}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <h2>Salle</h2>
+      <h4>Salle</h4>
       <p>{{atelier.salle.nom}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <h2>Métiers</h2>
+      <h4>Métiers</h4>
       {% for metier in atelier.metiers %}
       <p>{{ loop.first ? ',' : '' }}{{metier.nom}}</p>
       {% else %}
@@ -37,13 +41,13 @@
   </div>
   <div class="row">
     <div class="col">
-      <h2>Nombre de participants</h2>
+      <h4>Nombre de participants</h4>
       <p>{{atelier.lyceens|length}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <h2>Intervenants</h2>
+      <h4>Intervenants</h4>
       {% if atelier.intervenants is not empty %}
       <ul>
         {% for intervenant in atelier.intervenants %}
@@ -57,7 +61,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <h2>Ressources</h2>
+      <h4>Ressources</h4>
       {% if atelier.ressources is not empty %}
       <ul>
         {% for ressource in atelier.ressources %}
