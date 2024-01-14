@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Reponse</h1>
 
-    {{ include('reponse/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back_office/reponse/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_reponse_index') }}">back to list</a>
 
-    {{ include('reponse/_delete_form.html.twig') }}
+    {{ include('back_office/reponse/_delete_form.html.twig') }}
 {% endblock %}

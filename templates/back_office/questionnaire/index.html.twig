@@ -17,7 +17,7 @@
         {% for questionnaire in questionnaires %}
             <tr>
                 <td>{{ questionnaire.id }}</td>
-                <td>{{ questionnaire.annee ? questionnaire.annee|date('Y-m-d') : '' }}</td>
+                <td>{{ questionnaire.annee }}</td>
                 <td>
                     <a href="{{ path('app_questionnaire_show', {'id': questionnaire.id}) }}">show</a>
                     <a href="{{ path('app_questionnaire_edit', {'id': questionnaire.id}) }}">edit</a>

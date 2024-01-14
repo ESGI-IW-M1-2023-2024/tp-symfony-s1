@@ -19,7 +19,7 @@ class SalleController extends AbstractController
     #[Route('/', name: 'app_salle_index', methods: ['GET'])]
     public function index(SalleRepository $salleRepository): Response
     {
-        return $this->render('salle/index.html.twig', [
+        return $this->render('back_office/salle/index.html.twig', [
             'salles' => $salleRepository->findAll(),
         ]);
     }
@@ -38,7 +38,7 @@ class SalleController extends AbstractController
             return $this->redirectToRoute('app_salle_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('salle/new.html.twig', [
+        return $this->render('back_office/salle/new.html.twig', [
             'salle' => $salle,
             'form' => $form,
         ]);
@@ -47,7 +47,7 @@ class SalleController extends AbstractController
     #[Route('/{id}', name: 'app_salle_show', methods: ['GET'])]
     public function show(Salle $salle): Response
     {
-        return $this->render('salle/show.html.twig', [
+        return $this->render('back_office/salle/show.html.twig', [
             'salle' => $salle,
         ]);
     }
@@ -64,7 +64,7 @@ class SalleController extends AbstractController
             return $this->redirectToRoute('app_salle_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('salle/edit.html.twig', [
+        return $this->render('back_office/salle/edit.html.twig', [
             'salle' => $salle,
             'form' => $form,
         ]);

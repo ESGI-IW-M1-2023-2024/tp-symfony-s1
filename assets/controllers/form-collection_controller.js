@@ -18,8 +18,11 @@ export default class extends Controller {
 
     addCollectionElement(event) {
         const item = document.createElement('li');
+        item.setAttribute('data-form-collection-target', 'field');
         item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
-        item.innerHTML += '<button type="button" class="btn btn-danger btn-sm remove-item">Remove</button>';
+        item.innerHTML += `<button type="button" class="btn btn-danger btn-sm remove-item" data-action="click->form-collection#removeItem">
+        Retirer
+    </button>`;
         this.collectionContainerTarget.appendChild(item);
         this.indexValue++;
     }
