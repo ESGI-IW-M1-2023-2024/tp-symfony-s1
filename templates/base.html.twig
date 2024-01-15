@@ -15,21 +15,19 @@
         {% endblock %}
     </head>
     <body>
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="d-flex">
-                <div>
-                    {# Mettre les liens des différentes entités et page de stats demandées dans le tp #}
-                    {{ include("layout/admin/sidebar.html.twig") }}
-                </div>
-                <div class="w-100">
-                    {{ include("layout/header.html.twig") }}
-                    <div class="w-75 m-auto">
-                        {% block body %}{% endblock %}
-                    </div>
+        <div class="d-flex">
+            {% if is_granted('ROLE_ADMIN') %}
+            <div>
+                {# Mettre les liens des différentes entités et page de stats demandées dans le tp #}
+                {{ include("layout/admin/sidebar.html.twig") }}
+            </div>
+            {% endif %}
+            <div class="w-100">
+                {{ include("layout/header.html.twig") }}
+                <div class="w-75 m-auto">
+                    {% block body %}{% endblock %}
                 </div>
             </div>
-        {% else %}
-            {{ include("layout/header.html.twig") }}
-        {% endif %}
+        </div>
     </body>
 </html>
