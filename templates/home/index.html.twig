@@ -4,18 +4,47 @@
 
 {% block body %}
 <style>
-    body { background-color: #FFFFF2 ;}
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="mx-auto w-50">
-    <h1 class="mx-auto">Welcome to the Metier Forum!</h1>
 
-    <img src="https://formation-professionnelle.ufcv.fr/Portals/0/Images/Actus/Article-Forum-FORPROMarseille-Sept2020.png?ver=2020-09-09-143929-017" alt="img" class="w-100">
+<div class="mx-auto w-90 border border-4 border-primary p-5 rounded-3">
+    <h1 class="mx-auto text-primary text-center mb-5">Bienvenue au forum des metiers! </h1>
+    <p>
+        Nous sommes ravis de vous accueillir sur le site de l'Association XYZ, dédié à notre prochain forum passionnant de
+        découverte des métiers. Notre mission est de connecter les esprits curieux avec les opportunités professionnelles variées qui façonnent notre monde.
+    </p>
+    <div class="d-flex">
+
+        <div>
+            <h2 class="text-primary">À propos du Forum  </h2>
+            <p>
+                Le Forum Découverte des Métiers est une plateforme unique où les participants auront l'occasion d'explorer une multitude de carrières,
+                de discuter avec des professionnels chevronnés, et d'obtenir des conseils précieux pour orienter leur avenir. Que vous soyez lycéen, étudiant,
+                en reconversion ou simplement en quête de nouvelles perspectives, ce forum est conçu pour vous inspirer et vous guider dans votre parcours professionnel.
+            </p>
+
+            <h2 class="text-primary">Ce que vous pouvez attendre</h2>
+
+            <ul>
+                <li>Des présentations interactives de professionnels évoluant dans des domaines variés.</li>
+                <li>Des ateliers pratiques pour acquérir des compétences spécifiques.</li>
+                <li>Des sessions de questions-réponses pour échanger directement avec les experts.</li>
+                <li>Des témoignages inspirants sur des parcours professionnels atypiques.</li>
+                <li>Un espace dédié aux rencontres et au réseautage.</li>
+            </ul>
+
+        </div>
+        <div class="">
+            <img src="https://formation-professionnelle.ufcv.fr/Portals/0/Images/Actus/Article-Forum-FORPROMarseille-Sept2020.png?ver=2020-09-09-143929-017" alt="img" class="w-100 p-1">
+
+        </div>
+    </div>
+    <div class="btn d-flex  justify-content-center">
+        <a class="btn btn-primary mx-2" href="{{ path('app_lyceen_inscription') }}">S'inscrire à un atelier</a>
+    </div>
 </div>
 
-<div class="btn d-flex  justify-content-center">
-    <a class="btn btn-primary mx-2" href="{{ path('app_lyceen_inscription') }}">S'inscrire</a>
-</div>
+
 {% endblock %}
